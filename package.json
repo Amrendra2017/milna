@@ -5,7 +5,7 @@
   "repository": "https://github.com/Amrendra2017/milna",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "node index.js",
     "e2e": "repo-tools test deploy",
     "test": "repo-tools test app",
     "cover": "nyc --cache npm test; nyc report --reporter=html"
