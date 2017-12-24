@@ -10,8 +10,13 @@ server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
 
+// Say hello!
+app.get('/', (req, res) => {
+  res.status(200).send('Chat server running!');
+});
+
 // Routing
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // Chatroom
 
