@@ -53,7 +53,7 @@ $(function() {
        // added 28 dec join room
       //socket.emit('add user', username);     
       if(roomName != 'undefined')
-        socket.emit('join room',{
+        socket.emit('room add user',{
           username: username,
           room: roomName
         });
@@ -259,7 +259,7 @@ $(function() {
   });
   
   // added 28 dec join room
-  socket.on('user joined room', function (data) {
+  socket.on('room user joined', function (data) {
      log(data.username + ' joined room ' + data.room);
   });
    // end  28 dec join room
