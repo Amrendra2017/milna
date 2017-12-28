@@ -249,15 +249,16 @@ $(function() {
     log(data.username + ' joined');
     addParticipantsMessage(data);
     // added 28 dec join room
-    socket.emit('join room',{
-      username: data.username,
-      room: roomName
-    });
+    if(roomName != 'undefined')
+      socket.emit('join room',{
+        username: data.username,
+        room: roomName
+      });
     // end  28 dec join room
   });
   
   // added 28 dec join room
-  socket.on('event added done', function (data) {
+  socket.on('user joined room', function (data) {
      log(data.username + ' joined room ' + data.room);
   });
    // end  28 dec join room
