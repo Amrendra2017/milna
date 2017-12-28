@@ -112,7 +112,7 @@ $(function() {
     // Adds the visual chat message to the message list
   function addChatMessageRoom (data, options) {
     // Don't fade the message in if there is an 'X was typing'
-    var $typingMessages = getTypingMessagesRoom(data);
+    var $typingMessages = getTypingMessages(data);
     options = options || {};
     if ($typingMessages.length !== 0) {
       options.fade = false;
