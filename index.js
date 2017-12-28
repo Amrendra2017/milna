@@ -39,7 +39,7 @@ io.on('connection', function (socket) {
     
     var room = data.room;
     var username = data.username;
-    
+    socket.username = username;
     socket.join(room);
     
     socket.broadcast.to(room).emit('user joined room', {
