@@ -73,7 +73,7 @@ $(function() {
       $inputMessage.val('');
       addChatMessageRoom({
         username: username,
-        message: message
+        message: {message: message, room: roomName}
       });
       // tell server to execute 'new message' and send along one parameter altered 28 dec
       socket.emit('room new message', {message: message, room: roomName});
