@@ -280,12 +280,12 @@ $(function() {
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
-    addChatMessageRoom(data);
+    addChatMessage(data);
   });
   
    // Whenever the server emits 'room new message', update the chat body
   socket.on('room new message', function (data) {
-    addChatMessage(data);
+    addChatMessageRoom(data);
   });
 
   // Whenever the server emits 'user joined', log it in the chat body
