@@ -65,7 +65,9 @@ $(function() {
   function sendMessage () {
     var message = $inputMessage.val();
     // Prevent markup from being injected into the message
+    console.log(message);
     message = cleanInput(message);
+     console.log(message);
     // if there is a non-empty message and a socket connection
     if (message && connected) {
       $inputMessage.val('');
@@ -240,6 +242,7 @@ $(function() {
     }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
+      console.log(username);
       if (username) {
         sendMessage();
         socket.emit('stop typing');
