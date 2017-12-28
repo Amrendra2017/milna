@@ -34,7 +34,19 @@ io.on('connection', function (socket) {
     });
   });
   
-  // when the client emits 'join room', this listens and executes
+  // when the client emits 'room new message', this listens and executes
+  socket.on('room new message', function (data) {
+    // we tell the client to execute 'room new message'
+    
+    var room = data.room;
+    
+    socket.broadcast.to(room).emit('room new message', {
+      username: socket.username,
+      message: data
+    });
+  });
+  
+  // when the client emits 'room add user', this listens and executes added 28 dec
   socket.on('room add user', function (data) {
     
     var room = data.room;
