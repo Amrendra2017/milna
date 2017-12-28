@@ -257,7 +257,7 @@ $(function() {
   });
   
   // added 28 dec join room
-  socket.on('join room', function (data) {
+  socket.on('event added done', function (data) {
      log(data.username + ' joined room ' + data.room);
   });
    // end  28 dec join room
