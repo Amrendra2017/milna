@@ -275,11 +275,11 @@ $(function() {
   socket.on('login', function (data) {
     connected = true;
     // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – ";
-    log(message, {
-      prepend: true
-    });
-    addParticipantsMessage(data);
+    //var message = "Welcome to Socket.IO Chat – ";
+    //log(message, {
+    //  prepend: true
+    //});
+    //addParticipantsMessage(data);
   });
 
   // Whenever the server emits 'new message', update the chat body
@@ -300,13 +300,7 @@ $(function() {
   });
   
   // added 28 dec join room
-  socket.on('room user joined', function (data) {
-    connected = true;
-    // Display the welcome message
-    var message = "Welcome to Socket.IO Chat – ";
-    log(message, {
-      prepend: true
-    });   
+  socket.on('room user joined', function (data) {    
      log(data.username + ' joined room ' + data.room);
   });
    // end  28 dec join room
