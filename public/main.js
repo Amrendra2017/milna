@@ -73,8 +73,8 @@ $(function() {
         username: username,
         message: message
       });
-      // tell server to execute 'new message' and send along one parameter
-      socket.emit('new message', message);
+      // tell server to execute 'new message' and send along one parameter altered 28 dec
+      socket.emit('room new message', {message: message, room: roomName});
     }
   }
 
@@ -99,6 +99,31 @@ $(function() {
       .css('color', getUsernameColor(data.username));
     var $messageBodyDiv = $('<span class="messageBody">')
       .text(data.message);
+
+    var typingClass = data.typing ? 'typing' : '';
+    var $messageDiv = $('<li class="message"/>')
+      .data('username', data.username)
+      .addClass(typingClass)
+      .append($usernameDiv, $messageBodyDiv);
+
+    addMessageElement($messageDiv, options);
+  }
+  
+    // Adds the visual chat message to the message list
+  function addChatMessageRoom (data, options) {
+    // Don't fade the message in if there is an 'X was typing'
+    var $typingMessages = getTypingMessagesRoom(data);
+    options = options || {};
+    if ($typingMessages.length !== 0) {
+      options.fade = false;
+      $typingMessages.remove();
+    }
+
+    var $usernameDiv = $('<span class="username"/>')
+      .text(data.username)
+      .css('color', getUsernameColor(data.username));
+    var $messageBodyDiv = $('<span class="messageBody">')
+      .text(data.message.message);
 
     var typingClass = data.typing ? 'typing' : '';
     var $messageDiv = $('<li class="message"/>')
@@ -185,6 +210,13 @@ $(function() {
       return $(this).data('username') === data.username;
     });
   }
+  
+  // Gets the 'X is typing' messages of a user 28 dec
+  function getTypingMessagesRoom (data) {
+    return $('.typing.message').filter(function (i) {
+      return $(this).data('username') === data.username;
+    });
+  }
 
   // Gets the color of a username through our hash function
   function getUsernameColor (username) {
@@ -248,6 +280,11 @@ $(function() {
 
   // Whenever the server emits 'new message', update the chat body
   socket.on('new message', function (data) {
+    addChatMessageRoom(data);
+  });
+  
+   // Whenever the server emits 'room new message', update the chat body
+  socket.on('room new message', function (data) {
     addChatMessage(data);
   });
 
