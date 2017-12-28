@@ -301,6 +301,12 @@ $(function() {
   
   // added 28 dec join room
   socket.on('room user joined', function (data) {
+    connected = true;
+    // Display the welcome message
+    var message = "Welcome to Socket.IO Chat – ";
+    log(message, {
+      prepend: true
+    });   
      log(data.username + ' joined room ' + data.room);
   });
    // end  28 dec join room
