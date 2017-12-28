@@ -248,8 +248,20 @@ $(function() {
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
+    // added 28 dec join room
+    socket.emit('join room',{
+      username: data.username,
+      room: roomName
+    });
+    // end  28 dec join room
   });
-
+  
+  // added 28 dec join room
+  socket.on('join room', function (data) {
+     log(data.username + ' joined room ' + data.room);
+  });
+   // end  28 dec join room
+  
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
     log(data.username + ' left');
