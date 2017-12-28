@@ -42,7 +42,7 @@ io.on('connection', function (socket) {
     
     socket.join(room);
     
-    socket.broadcast.emit('event added done', {
+    socket.broadcast.to(room).emit('user joined room', {
       username: socket.username,
       room: room
     });
