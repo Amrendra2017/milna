@@ -35,14 +35,14 @@ io.on('connection', function (socket) {
   });
   
   // when the client emits 'join room', this listens and executes
-  socket.on('join room', function (data) {
+  socket.on('room add user', function (data) {
     
     var room = data.room;
     var username = data.username;
     socket.username = username;
     socket.join(room);
     
-    socket.broadcast.to(room).emit('user joined room', {
+    socket.broadcast.to(room).emit('room user joined', {
       username: socket.username,
       room: room
     });
