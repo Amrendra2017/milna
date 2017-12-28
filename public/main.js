@@ -307,9 +307,16 @@ $(function() {
   
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
+    socket.emit('room disconnect', roomName)
     log(data.username + ' left');
     addParticipantsMessage(data);
     removeChatTyping(data);
+  });
+
+  // Whenever the server emits 'user left', log it in the chat body
+  socket.on('room user left', function (data) {   
+    log(data.username + ' left room ' + data.roomName);
+   
   });
 
   // Whenever the server emits 'typing', show the typing message
