@@ -33,6 +33,23 @@ io.on('connection', function (socket) {
       message: data
     });
   });
+  
+  // when the client emits 'join room', this listens and executes
+  socket.on('join room', function (data) {
+    
+    var room = data.room;
+    var username = data.username;
+    
+    socket.join(room);
+    
+    socket.broadcast.emit('event added done', {
+      username: socket.username,
+      room: room
+    });
+    
+    //socket.leave(room);
+    
+  });
 
   // when the client emits 'add user', this listens and executes
   socket.on('add user', function (username) {
