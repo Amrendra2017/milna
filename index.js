@@ -83,6 +83,15 @@ io.on('connection', function (socket) {
     });
   });
 
+  // when the client emits 'room disconnect', we broadcast it to others
+  socket.on('room disconnect', function (room) {
+    socket.leave(room);
+    socket.broadcast.to(room).emit('room user left', {
+      username: socket.username,
+      room: room
+    });
+  });
+  
   // when the client emits 'typing', we broadcast it to others
   socket.on('typing', function () {
     socket.broadcast.emit('typing', {
