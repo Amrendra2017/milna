@@ -50,7 +50,14 @@ $(function() {
       $currentInput = $inputMessage.focus();
 
       // Tell the server your username
-      socket.emit('add user', username);
+       // added 28 dec join room
+      //socket.emit('add user', username);     
+      if(roomName != 'undefined')
+        socket.emit('join room',{
+          username: username,
+          room: roomName
+        });
+      // end  28 dec join room
     }
   }
 
@@ -248,13 +255,7 @@ $(function() {
   socket.on('user joined', function (data) {
     log(data.username + ' joined');
     addParticipantsMessage(data);
-    // added 28 dec join room
-    if(roomName != 'undefined')
-      socket.emit('join room',{
-        username: data.username,
-        room: roomName
-      });
-    // end  28 dec join room
+    
   });
   
   // added 28 dec join room
